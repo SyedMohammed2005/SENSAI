@@ -22,7 +22,7 @@ import { inngest } from "@/lib/inngest/client";
   If not imported, it will cause error below
   because generateIndustryInsights is used.
 */
-//  import { generateIndustryInsights } from "@/lib/inngest/function";
+// import { generateIndustryInsights } from "@/lib/inngest/function";
 
 /*
   This exports API route handlers for:
@@ -56,6 +56,3 @@ export const { GET, POST, PUT } = serve({
   */
   functions: [generateIndustryInsights],
 });
-
-
-
