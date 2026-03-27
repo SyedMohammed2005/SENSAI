@@ -1,34 +1,140 @@
 {
+  // ======================================================
+  // ⚙️ TYPESCRIPT COMPILER CONFIGURATION (tsconfig.json)
+  // ======================================================
+
   "compilerOptions": {
+
+    // ------------------------------------------------------
+    // 🎯 JavaScript Output Target
+    // ------------------------------------------------------
+    // ES2017 means TypeScript will compile to ES2017-compatible JS
+    // Controls features like async/await transformation
     "target": "ES2017",
+
+    // ------------------------------------------------------
+    // 📚 Type Definitions Available in Project
+    // ------------------------------------------------------
+    // "dom" → browser APIs (window, document)
+    // "dom.iterable" → iterable DOM collections
+    // "esnext" → latest ECMAScript features
     "lib": ["dom", "dom.iterable", "esnext"],
+
+    // Allow JavaScript files inside project
     "allowJs": true,
+
+    // Skip type checking for node_modules
+    // Improves performance
     "skipLibCheck": true,
+
+    // Enable strict type checking
+    // This activates all strict TS rules
     "strict": true,
+
+    // Do NOT emit compiled JS files
+    // Next.js handles compilation internally
     "noEmit": true,
+
+    // Enables compatibility for CommonJS imports
+    // Example: import x from "module"
     "esModuleInterop": true,
+
+    // Use modern ES modules
     "module": "esnext",
+
+    // Let bundler (Next.js / Turbopack / Webpack) handle module resolution
     "moduleResolution": "bundler",
+
+    // Allows importing JSON files
     "resolveJsonModule": true,
+
+    // Ensures each file can be safely transpiled independently
     "isolatedModules": true,
+
+    // React 17+ automatic JSX runtime
+    // No need to import React manually
     "jsx": "react-jsx",
+
+    // Speeds up subsequent builds
+    // Creates .tsbuildinfo cache
     "incremental": true,
+
+    // ------------------------------------------------------
+    // 🔌 Next.js TypeScript Plugin
+    // ------------------------------------------------------
+    // Enables Next.js specific type enhancements
     "plugins": [
       {
         "name": "next"
       }
     ],
+
+    // ------------------------------------------------------
+    // 🛣️ Path Aliases
+    // ------------------------------------------------------
+    // "@/*" maps to root directory
+    // Example:
+    // import Button from "@/components/ui/button"
     "paths": {
       "@/*": ["./*"]
     }
   },
+
+  // ======================================================
+  // 📂 FILES INCLUDED IN TYPE CHECKING
+  // ======================================================
   "include": [
+
+    // Next.js auto-generated type definitions
     "next-env.d.ts",
+
+    // All TypeScript files
     "**/*.ts",
     "**/*.tsx",
+
+    // Next.js generated types (production + dev)
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+
+    // ES module TypeScript files
+    "**/*.mts",
+
+    // --------------------------------------------------
+    // ⚠️ Explicitly Included JavaScript Files
+    // --------------------------------------------------
+    // These are manually added JS files that TypeScript
+    // should still type-check because allowJs=true
+
+    "app/page.jsx",
+    "app/layout.js",
+
+    // UI Components (likely from shadcn or custom UI)
+    "components/ui/button.jsx",
+    "components/ui/theme-provider.jsx",
+    "components/ui/accordion.jsx",
+    "components/ui/alert-dialog.jsx",
+    "components/ui/badge.jsx",
+    "components/ui/textarea.jsx",
+    "components/ui/tabs.jsx",
+    "components/ui/sonner.jsx",
+    "components/ui/select.jsx",
+    "components/ui/radio-group.jsx",
+    "components/ui/progress.jsx",
+    "components/ui/label.jsx",
+    "components/ui/input.jsx",
+    "components/ui/dropdown-menu.jsx",
+    "components/ui/dialog.jsx",
+    "components/ui/card.jsx",
+
+    // Next.js config written in TypeScript
+    "next.config.ts"
   ],
-  "exclude": ["node_modules"]
+
+  // ======================================================
+  // 🚫 EXCLUDED FROM TYPE CHECKING
+  // ======================================================
+  "exclude": [
+    // External dependencies
+    "node_modules"
+  ]
 }
