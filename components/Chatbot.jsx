@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./Chatbot.module.css";
 export default function Chatbot() {
-
   const initialMessage = [
     {
       text: "👋 Welcome to SenseAI! I'm your career assistant. How can I support you today?",
@@ -17,18 +16,16 @@ export default function Chatbot() {
   const [typing, setTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, typing]);
 
- useEffect(() => {
-  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [messages, typing]);
-
-// 🔥 Auto show help when chatbot opens
-useEffect(() => {
-  if (open && messages.length === 1) {
-    sendMessage("help");
-  }
-}, [open]);
-
+  // 🔥 Auto show help when chatbot opens
+  useEffect(() => {
+    if (open && messages.length === 1) {
+      sendMessage("help");
+    }
+  }, [open]);
 
   // ================= BOT LOGIC =================
   const getBotResponse = (msg) => {
@@ -44,7 +41,7 @@ useEffect(() => {
     }
 
     // ================= HELP =================
-    if (m === "help" || m.includes("help")) {
+    if (m === "Help" || m.includes("help")) {
       return {
         text: `I can help you with:
 
@@ -52,6 +49,9 @@ useEffect(() => {
 2️⃣ Build Resume  
 3️⃣ Cover Letter  
 4️⃣ Interview Preparation  
+5️⃣ Career Roadmap
+
+
 
 Please type any one of these to continue.`,
         options: [
@@ -59,6 +59,8 @@ Please type any one of these to continue.`,
           "Build Resume",
           "Cover Letter",
           "Interview Preparation",
+          "Career Roadmap",
+          "Sign-In",
         ],
       };
     }
@@ -154,6 +156,57 @@ Click on any quiz to review:
 Track your progress and improve confidently.`;
     }
 
+
+    if (m.includes("career roadmap")) {
+  return `🗺️ *Career Roadmap Module*
+
+1. Choose the career domain / skill roadmap you want (e.g., AI, Web Dev, Data Science).
+2. Select your current level:
+
+✔ Beginner  
+✔ Intermediate  
+✔ Advanced  
+
+3. Click on *Generate Roadmap* to create your personalized plan.
+
+After generation, you can explore:
+
+✔ Recommended Career Path  
+✔ Step-by-Step Learning Roadmap  
+✔ Required Skills to Learn  
+✔ Suggested Projects  
+✔ Tools & Technologies  
+
+Each step in the roadmap includes:
+
+• Learning Resources  
+• Estimated Time to Complete  
+• Hands-on Tasks / Mini Projects  
+
+Track your progress and build your career step-by-step with clarity 🚀`;
+}
+if (m.includes("career roadmap")) {
+  return `🗺️ *Career Roadmap Module*
+
+1. Fill in your profile details (skills, interests, goals).
+2. Based on your input, the system generates a personalized roadmap.
+
+After generation, you can explore:
+
+✔ Recommended Career Path  
+✔ Required Skills to Learn  
+✔ Step-by-Step Learning Plan  
+✔ Suggested Projects  
+✔ Tools & Technologies to Focus On  
+
+Each step in the roadmap includes:
+
+• Learning Resources  
+• Estimated Time to Complete  
+• Practical Tasks / Mini Projects  
+
+Track your journey and build your career step-by-step with clarity 🚀`;
+}
     // ================= PROFILE CHANGE =================
     if (m.includes("change profile") || m.includes("edit profile")) {
       return `🔄 *How to Change Your Profile*
@@ -170,6 +223,7 @@ New Industry Insights will be generated based on your updated profile.`;
     if (
       m.includes("sign in") ||
       m.includes("signin") ||
+      m.includes("sign-in") || // ✅ ADD THIS
       m.includes("log in") ||
       m.includes("login")
     ) {
@@ -200,13 +254,16 @@ Your authentication is securely managed by Clerk.`;
     if (m.includes("thank")) {
       return "You're most welcome 😊 I'm glad I could assist you. Let me know if you need anything else!";
     }
-     // ================= HOW ARE  YOU =================
-    if (m.includes("how are you")
-     || m.includes("how r u")) {
+    // ================= HOW ARE  YOU =================
+    if (m.includes("how are you") || m.includes("how r u")) {
       return "I'm doing great! Thanks for asking. How can I assist you today?";
     }
-      // ================= KHAIRIYAT =================
-    if (m.includes("khairiyaat") || m.includes("khaairiyat") || m.includes("khairiyat")) {
+    // ================= KHAIRIYAT =================
+    if (
+      m.includes("khairiyaat") ||
+      m.includes("khaairiyat") ||
+      m.includes("khairiyat")
+    ) {
       return "Alhamdulillah 😊 I'm glad I could assist you. Let me know if you need anything else!";
     }
 
@@ -247,33 +304,31 @@ Your authentication is securely managed by Clerk.`;
 
   return (
     <>
-     <button
-  className={styles.toggle}
-  onClick={() => {
-    if (open) {
-      // When closing → reset chat
-      setMessages(initialMessage);
-    }
-    setOpen(!open);
-  }}
->
-  🤖
-</button>
-
+      <button
+        className={styles.toggle}
+        onClick={() => {
+          if (open) {
+            // When closing → reset chat
+            setMessages(initialMessage);
+          }
+          setOpen(!open);
+        }}
+      >
+        🤖
+      </button>
 
       {open && (
         <div className={styles.container}>
           <div className={styles.header}>
             <h5>SenseAI Assistant</h5>
-           <button
-  onClick={() => {
-    setMessages(initialMessage); // reset chat
-    setOpen(false);              // close chat
-  }}
->
-  ✖
-</button>
-
+            <button
+              onClick={() => {
+                setMessages(initialMessage); // reset chat
+                setOpen(false); // close chat
+              }}
+            >
+              ✖
+            </button>
           </div>
 
           <div className={styles.messages}>

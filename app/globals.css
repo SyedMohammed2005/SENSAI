@@ -195,7 +195,7 @@ body {
   );
 
   background-size: 300% 100%;
-  animation: snakeMove 5s linear infinite;
+animation: snakeMove 25s linear infinite;
 
   -webkit-mask :
     linear-gradient(#fff 0 0) content-box,
@@ -233,7 +233,7 @@ button:hover .snake-border {
   );
 
   background-size: 300% 100%;
-  animation: snakeMoveWhite 5s linear infinite;
+ animation: snakeMove 25s linear infinite;
 
 -webkit-mask:
     linear-gradient(#fff 0 0) content-box,

@@ -23,7 +23,8 @@ const isProtectedRoute = createRouteMatcher([
   "/resume(.*)",          // Protect resume pages
   "/ai-cover-letter(.*)", // Protect AI cover letter pages
   "/interview(.*)",       // Protect interview preparation pages
-  "/onboarding(.*)",      // Protect onboarding flow
+  "/onboarding(.*)",
+  "/career-roadmap(.*)"      // Protect onboarding flow
 ]);
 
 
